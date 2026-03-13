@@ -6,17 +6,22 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.programacionmovil.citafacil.features.auth.domain.usecases.GetUserDataUseCase
+import com.programacionmovil.citafacil.features.auth.domain.repositories.AuthRepository // Importante
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import com.programacionmovil.citafacil.features.auth.domain.entities.User
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val getUserDataUseCase: GetUserDataUseCase
+    private val getUserDataUseCase: GetUserDataUseCase,
+    private val repository: AuthRepository
 ) : ViewModel() {
 
     var userName by mutableStateOf("Cargando...")
+        private set
+
+    // Estado para controlar la navegación al cerrar sesión
+    var isLoggedOut by mutableStateOf(false)
         private set
 
     init {
@@ -30,6 +35,13 @@ class HomeViewModel @Inject constructor(
             }.onFailure {
                 userName = "Error de conexión"
             }
+        }
+    }
+
+    fun logout() {
+        viewModelScope.launch {
+            repository.logout()
+            isLoggedOut = true
         }
     }
 }

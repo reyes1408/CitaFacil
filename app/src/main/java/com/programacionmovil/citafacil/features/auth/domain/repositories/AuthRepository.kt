@@ -8,4 +8,6 @@ interface AuthRepository {
     suspend fun getUserData(uid: String): Result<User?>
     suspend fun saveUserData(user: User): Result<Unit>
     fun getCurrentUserUid(): String?
+
+    fun logout()
 }
