@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "968332383634",
+    "project_id": "citafacil-b554e",
+    "storage_bucket": "citafacil-b554e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:968332383634:android:219fca80785d489f965d4b",
+        "android_client_info": {
+          "package_name": "com.programacionmovil.citafacil"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvTl5cZJ4jdlyIc48Vj9RO9W1igt03NGY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:968332383634:android:cba22c0332e38615965d4b",
+        "android_client_info": {
+          "package_name": "com.programacionparamoviles.citafacil"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvTl5cZJ4jdlyIc48Vj9RO9W1igt03NGY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
