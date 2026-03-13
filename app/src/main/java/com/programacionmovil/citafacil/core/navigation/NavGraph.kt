@@ -1,16 +1,12 @@
 package com.programacionmovil.citafacil.core.navigation
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.programacionmovil.citafacil.features.auth.presentation.screens.login.LoginScreen
 import com.programacionmovil.citafacil.features.auth.presentation.screens.register.RegisterScreen
+import com.programacionmovil.citafacil.features.home.presentation.screens.HomeScreen
 
 @Composable
 fun NavGraph(navController: NavHostController) {
@@ -19,26 +15,27 @@ fun NavGraph(navController: NavHostController) {
         composable("login") {
             LoginScreen(
                 onNavigateToRegister = { navController.navigate("register") },
-                onLoginSuccess = { navController.navigate("home") }
+                onLoginSuccess = {
+                    navController.navigate("home") {
+                        popUpTo("login") { inclusive = true } // Evita volver atrás al login
+                    }
+                }
             )
         }
 
         composable("register") {
             RegisterScreen(
-                onNavigateBack = { navController.popBackStack() }, // Regresa al Login
+                onNavigateBack = { navController.popBackStack() },
                 onRegisterSuccess = {
-                    // Al registrarse con éxito pasa a Home
                     navController.navigate("home") {
-                        popUpTo("login") { inclusive = true } // Limpia el historial
+                        popUpTo("login") { inclusive = true }
                     }
                 }
             )
         }
 
         composable("home") {
-            Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text("¡Bienvenido a la Home!")
-            }
+            HomeScreen(navController = navController)
         }
     }
 }

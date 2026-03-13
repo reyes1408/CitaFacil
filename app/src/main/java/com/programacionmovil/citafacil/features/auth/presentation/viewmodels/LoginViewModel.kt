@@ -21,13 +21,10 @@ class LoginViewModel @Inject constructor(
     fun login(email: String, pass: String) {
         viewModelScope.launch {
             _state.value = AuthState.Loading
-
-            val result = loginUseCase(email, pass)
-
-            result.onSuccess { user ->
-                _state.value = AuthState.Success(user)
+            loginUseCase(email, pass).onSuccess {
+                _state.value = AuthState.Success
             }.onFailure { exception ->
-                _state.value = AuthState.Error(exception.message ?: "Error desconocido")
+                _state.value = AuthState.Error(exception.message ?: "Error al iniciar sesión")
             }
         }
     }
