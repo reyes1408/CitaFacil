@@ -1,5 +1,9 @@
 package com.programacionmovil.citafacil.features.auth.domain.usecases
 
+import com.programacionmovil.citafacil.features.auth.domain.entities.User
+import com.programacionmovil.citafacil.features.auth.domain.repositories.AuthRepository
+import javax.inject.Inject
+
 class GetUserDataUseCase @Inject constructor(
     private val repository: AuthRepository
 ) {

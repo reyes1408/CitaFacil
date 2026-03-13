@@ -1,11 +1,22 @@
 package com.programacionmovil.citafacil.features.home.presentation
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.programacionmovil.citafacil.features.auth.domain.usecases.GetUserDataUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+import com.programacionmovil.citafacil.features.auth.domain.entities.User
+
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getUserDataUseCase: GetUserDataUseCase
 ) : ViewModel() {
 
-    var userName by mutableStateOf("")
+    var userName by mutableStateOf("Cargando...")
         private set
 
     init {
@@ -14,9 +25,10 @@ class HomeViewModel @Inject constructor(
 
     private fun loadUserData() {
         viewModelScope.launch {
-            val result = getUserDataUseCase()
-            result.onSuccess { user ->
-                userName = user?.name ?: "Usuario"
+            getUserDataUseCase().onSuccess { user ->
+                userName = user?.name ?: "Sin nombre"
+            }.onFailure {
+                userName = "Error de conexión"
             }
         }
     }

@@ -11,6 +11,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.programacionmovil.citafacil.features.auth.presentation.screens.login.LoginScreen
 import com.programacionmovil.citafacil.features.auth.presentation.screens.register.RegisterScreen
+import com.programacionmovil.citafacil.features.home.presentation.screens.HomeScreen
 
 @Composable
 fun NavGraph(navController: NavHostController) {
