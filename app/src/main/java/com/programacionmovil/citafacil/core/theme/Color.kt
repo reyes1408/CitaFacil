@@ -1,4 +1,4 @@
-package com.programacionmovil.citafacil.ui.theme
+package com.programacionmovil.citafacil.core.theme
 
 import androidx.compose.ui.graphics.Color
 

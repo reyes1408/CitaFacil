@@ -1,4 +1,4 @@
-package com.programacionmovil.citafacil.ui.theme
+package com.programacionmovil.citafacil.core.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
