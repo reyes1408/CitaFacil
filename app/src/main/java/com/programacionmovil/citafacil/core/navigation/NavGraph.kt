@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.programacionmovil.citafacil.features.appointments.presentation.screens.ScheduleScreen
 import com.programacionmovil.citafacil.features.auth.presentation.screens.login.LoginScreen
 import com.programacionmovil.citafacil.features.auth.presentation.screens.register.RegisterScreen
 import com.programacionmovil.citafacil.features.home.presentation.screens.HomeScreen
@@ -36,6 +37,10 @@ fun NavGraph(navController: NavHostController) {
 
         composable("home") {
             HomeScreen(navController = navController)
+        }
+
+        composable("schedule_appointment") {
+            ScheduleScreen(onNavigateBack = { navController.popBackStack() })
         }
     }
 }
