@@ -36,9 +36,7 @@ fun NavGraph(navController: NavHostController) {
         }
 
         composable("home") {
-            Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text("¡Bienvenido a la Home!")
-            }
+            HomeScreen()
         }
     }
 }

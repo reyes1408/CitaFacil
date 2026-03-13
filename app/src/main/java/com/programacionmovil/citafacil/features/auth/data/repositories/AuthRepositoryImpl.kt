@@ -38,6 +38,14 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun getUserData(uid: String): Result<User?> = try {
+        val document = firestore.collection("usuarios").document(uid).get().await()
+        val user = document.toObject(User::class.java)
+        Result.success(user)
+    } catch (e: Exception) {
+        Result.failure(e)
+    }
+
     override fun getCurrentUser(): User? {
         return firebaseAuth.currentUser?.let {
             User(id = it.uid, email = it.email ?: "")
