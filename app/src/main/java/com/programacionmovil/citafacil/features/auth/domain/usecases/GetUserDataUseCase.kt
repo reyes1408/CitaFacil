@@ -4,13 +4,15 @@ import com.programacionmovil.citafacil.features.auth.domain.entities.User
 import com.programacionmovil.citafacil.features.auth.domain.repositories.AuthRepository
 import javax.inject.Inject
 
-class LoginUseCase @Inject constructor(
+class GetUserDataUseCase @Inject constructor(
     private val repository: AuthRepository
 ) {
-    suspend operator fun invoke(email: String, pass: String): Result<Unit> {
-        if (email.isBlank() || pass.isBlank()) {
-            return Result.failure(Exception("El correo y la contraseña no pueden estar vacíos"))
+    suspend operator fun invoke(): Result<User?> {
+        val uid = repository.getCurrentUserUid()
+        return if (uid != null) {
+            repository.getUserData(uid)
+        } else {
+            Result.failure(Exception("Usuario no autenticado"))
         }
-        return repository.login(email, pass)
     }
 }

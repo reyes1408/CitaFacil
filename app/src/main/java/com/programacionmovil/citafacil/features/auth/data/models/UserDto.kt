@@ -1,7 +1,8 @@
 package com.programacionmovil.citafacil.features.auth.data.models
 
-data class UserDto (
-    val id: String = "",
+data class User(
+    val uid: String = "",
+    val name: String = "",
     val email: String = "",
-    val name: String? = null
+    val role: String = "patient"
 )

@@ -24,7 +24,7 @@ class RegisterViewModel @Inject constructor(
             val result = registerUseCase(email, pass, name)
 
             result.onSuccess { user ->
-                _state.value = AuthState.Success(user)
+                _state.value = AuthState.Success
             }.onFailure { exception ->
                 _state.value = AuthState.Error(exception.message ?: "Error al registrar")
             }
