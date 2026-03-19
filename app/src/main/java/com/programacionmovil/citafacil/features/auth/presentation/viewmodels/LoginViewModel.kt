@@ -29,7 +29,6 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    // Función para resetear el estado después de mostrar un error
     fun resetState() {
         _state.value = AuthState.Idle
     }

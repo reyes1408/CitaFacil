@@ -20,7 +20,6 @@ class HomeViewModel @Inject constructor(
     var userName by mutableStateOf("Cargando...")
         private set
 
-    // Estado para controlar la navegación al cerrar sesión
     var isLoggedOut by mutableStateOf(false)
         private set
 

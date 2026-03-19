@@ -30,7 +30,6 @@ class HardwareManager @Inject constructor(
         }
     }
 
-    // Función para un patrón de "éxito" (vibración doble)
     fun successVibration() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val timings = longArrayOf(0, 100, 50, 100)

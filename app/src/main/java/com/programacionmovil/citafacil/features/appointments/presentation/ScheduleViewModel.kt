@@ -1,5 +1,6 @@
 package com.programacionmovil.citafacil.features.appointments.presentation
 
+import android.graphics.Bitmap
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -14,51 +15,41 @@ import javax.inject.Inject
 @HiltViewModel
 class ScheduleViewModel @Inject constructor(
     private val scheduleUseCase: ScheduleAppointmentUseCase,
-    private val hardwareManager: HardwareManager // Inyectamos el control de hardware
+    private val hardwareManager: HardwareManager
 ) : ViewModel() {
 
-    // Estados de los campos del formulario
     var doctorName by mutableStateOf("")
     var date by mutableStateOf("")
     var reason by mutableStateOf("")
 
-    // Estados de control de la interfaz
+    var evidencePhoto by mutableStateOf<Bitmap?>(null)
+
     var isLoading by mutableStateOf(false)
         private set
-
     var isSuccess by mutableStateOf(false)
         private set
-
     var errorMessage by mutableStateOf<String?>(null)
         private set
 
     fun onSchedule() {
-        // Validación básica
         if (doctorName.isBlank() || date.isBlank() || reason.isBlank()) {
-            errorMessage = "Por favor, completa todos los campos"
-            hardwareManager.vibrate(500) // Vibración larga de advertencia/error
+            errorMessage = "Completa todos los campos"
+            hardwareManager.vibrate(500)
             return
         }
 
         viewModelScope.launch {
             isLoading = true
             errorMessage = null
-
-            // Vibración sutil al iniciar el proceso (Feedback táctil)
             hardwareManager.vibrate(50)
 
-            scheduleUseCase(doctorName, date, reason)
-                .onSuccess {
-                    // ¡ÉXITO! Vibración doble de confirmación
-                    hardwareManager.successVibration()
-                    isSuccess = true
-                }
-                .onFailure { exception ->
-                    // ERROR: Vibración de error
-                    hardwareManager.vibrate(500)
-                    errorMessage = exception.message ?: "Error desconocido al agendar"
-                }
+            scheduleUseCase(doctorName, date, reason).onSuccess {
 
+                if (evidencePhoto != null) {
+                    hardwareManager.successVibration()
+                }
+                isSuccess = true
+            }
             isLoading = false
         }
     }
